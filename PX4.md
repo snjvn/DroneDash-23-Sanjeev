@@ -27,10 +27,11 @@ sudo apt install -y protobuf-compiler libeigen3-dev libopencv-dev libgstreamer1.
 
 ### Build PX4
 ```bash
-make px4_sitl gazebo
+DONT_RUN=1 make px4_sitl gazebo
 ```
 
 ### Add PX4 to your path
+Add the following lines to your `~/.bashrc` so that PX4 is added to the path in every terminal.
 ```bash
 source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot
