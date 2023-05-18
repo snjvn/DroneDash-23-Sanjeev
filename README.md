@@ -17,7 +17,12 @@ We have provided a [demo script](./scripts/demo_node.py) to get you started. The
 roslauch drone_dash demo.launch
 ```
 
-If the demo does not work, and you encounter the message `Failsafe mode activated` in the terminal see the [Troubleshooting](#failsafe-mode-activated) section.
+To see the RGB and depth images from the camera in RVIZ, set the `rviz` parameter to `true`.
+```bash
+roslauch drone_dash demo.launch rviz:=true
+```
+
+Note: If the demo does not work, and you encounter the message `Failsafe mode activated` in the terminal see the [Troubleshooting](#failsafe-mode-activated) section.
 
 ## Resources
 We have provided a list of recommended resources that you can use to learn more about the development environment and the PX4 Autopilot Stack.
