@@ -9,14 +9,15 @@ You be running Ubuntu 20.04.
 ### Download PX4 Source Code
 ```bash
 cd ~
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git
 cd PX4-Autopilot
-git checkout v1.12.3
+git checkout tags/v1.13.3
+git submodule update --init --recursive
 ```
 
 ### Run the install script
 ```bash
-bash ./Tools/setup/ubuntu.sh
+bash ./Tools/setup/ubuntu.sh  --no-sim-tools --no-nuttx
 ```
 
 ### Install PX4 Dependencies
@@ -36,5 +37,5 @@ Add the following lines to your `~/.bashrc` so that PX4 is added to the path in 
 source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
-export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-9/plugins
+export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins
 ```

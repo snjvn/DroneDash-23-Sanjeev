@@ -13,5 +13,6 @@ sudo apt install -y ros-${ROS_DISTRO}-mavros ros-${ROS_DISTRO}-mavros-extras ros
 
 Then install GeographicLib datasets by running the `install_geographiclib_datasets.sh` script.
 ```bash
-wget -O - https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sudo bash
+wget -O /tmp/install_geographiclib_datasets.sh https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
+sudo bash /tmp/install_geographiclib_datasets.sh
 ```

@@ -12,13 +12,11 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 
 ## Set up your keys
 ```bash
-sudo apt update
-sudo apt install -y curl # if you haven't already installed curl
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 ```
 
 ## Installation
-Update the package index and then install the `ros-noetic-dektop-full` package, which installs all ROS packages plus all Gazebo packages.
+Update the package index and then install the `ros-noetic-dektop-full` package, which installs all ROS packages plus Gazebo.
 ```bash
 sudo apt update
 sudo apt install -y ros-noetic-desktop-full
@@ -33,5 +31,25 @@ source /opt/ros/noetic/setup.bash
 It can be convenient to automatically source this script every time a new shell is launched. The following command will do that for you.
 ```bash
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+## Setup Workspace
+Install build tools.
+```bash
+sudo apt update
+sudo apt install -y python3-catkin-tools
+```
+
+Create a catkin workspace and build it.
+```bash
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin build
+```
+
+Source the workspace.
+```bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
