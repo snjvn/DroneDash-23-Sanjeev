@@ -1,5 +1,5 @@
 # Drone Dash 2023
-This repository contains the support guide for Drone Dash @ Summer of Innovation 2023, IIT Dharwad.
+This is the official boilerplate repository for Drone Dash @ Summer of Innovation 2023, IIT Dharwad.
 
 ## Objective
 The objective of Drone Dash is to design a obstacle avoidance algorithm for a drone. There is an onboard color and depth camera which can be used for this task. You may use any algorithm you like. The goal is to reach the end of the track in the shortest time possible.
