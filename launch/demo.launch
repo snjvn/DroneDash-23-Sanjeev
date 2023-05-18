@@ -4,12 +4,12 @@
 
 	<!-- Include the MAVROS node with SITL and Gazebo -->
 	<include file="$(find px4)/launch/mavros_posix_sitl.launch">
-    	<arg name="world" default="$(find dronedash)/worlds/empty.world"/>
+    	<arg name="world" default="$(find dronedash)/worlds/1.world"/>
     	<arg name="sdf" value="$(find mavlink_sitl_gazebo)/models/iris_depth_camera/iris_depth_camera.sdf"/>
 	</include>
 
 	<!-- Our node to control the drone -->
-	<node pkg="dronedash" type="offb_node.py" name="offb_node_py" required="true" output="screen" />
+	<node pkg="dronedash" type="demo_node.py" name="demo_node" required="true" output="screen" />
 
 	<!-- RVIZ -->
 	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find dronedash)/rviz/config.rviz" if="$(arg rviz)" />
