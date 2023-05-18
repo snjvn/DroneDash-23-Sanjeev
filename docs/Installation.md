@@ -25,3 +25,16 @@ Install MAVROS using the instructions provided [here](./MAVROS.md).
 
 ## PX4
 Install PX4 using the instructions provided [here](./PX4.md).
+
+## Drone Dash
+Clone the Drone Dash repository.
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/IITDh-Robotics/DroneDash-23.git
+```
+
+Build the workspace.
+```bash
+cd ~/catkin_ws
+catkin build
+```

@@ -56,27 +56,30 @@ if __name__ == "__main__":
     last_req = rospy.Time.now()
 
     while(not rospy.is_shutdown()):
+        # First set the mode to offboard (refer to PX4 Flight Modes)
         if(current_state.mode != "OFFBOARD" and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
             if(set_mode_client.call(offb_set_mode).mode_sent == True):
                 rospy.loginfo("OFFBOARD enabled")
 
             last_req = rospy.Time.now()
-        else:
-            if(not current_state.armed and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
-                if(arming_client.call(arm_cmd).success == True):
-                    rospy.loginfo("Vehicle armed")
 
-                last_req = rospy.Time.now()
+        # Armed the vehicle
+        elif(not current_state.armed and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
+            if(arming_client.call(arm_cmd).success == True):
+                rospy.loginfo("Vehicle armed")
 
-            elif(current_state.armed and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
-                if pose.pose.position.x:
-                    pose.pose.position.x = 0    # If x setpoint is 2 change it to 0
-                    rospy.loginfo("Moving backward")
-                else:
-                    pose.pose.position.x = 2    # If x setpoint is 0 change it to 2
-                    rospy.loginfo("Moving forward")
+            last_req = rospy.Time.now()
 
-                last_req = rospy.Time.now()
+        # Move the vehicle
+        elif(current_state.armed and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
+            if pose.pose.position.x:
+                pose.pose.position.x = 0    # If x setpoint is 2 change it to 0
+                rospy.loginfo("Moving backward")
+            else:
+                pose.pose.position.x = 2    # If x setpoint is 0 change it to 2
+                rospy.loginfo("Moving forward")
+
+            last_req = rospy.Time.now()
 
 
         local_pos_pub.publish(pose)
