@@ -33,7 +33,7 @@ We have provided a list of recommended resources that you can use to learn more 
 * [Getting Started With ROS | Articulated Robotics on Youtube](https://youtube.com/playlist?list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt)
 
 ### PX4 Autopilot
-* [Flight Modes](https://docs.px4.io/main/en/flight_modes/#multicopter)
+* [Flight Modes](https://docs.px4.io/v1.13/en/flight_modes/#multicopter)
 * [User Guide](https://docs.px4.io/v1.13/en/ros/ros1.html)
 
 ## Troubleshooting
