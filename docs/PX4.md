@@ -1,14 +1,12 @@
----
-title: PX4 Installation Guide
-description: Installation Instructions for PX4 derived from the [Official Installation Guide](https://docs.px4.io/main/en/dev_setup/dev_env_linux_ubuntu.html#ros-gazebo-classic).
----
+# PX4 Installation Guide
+Installation Instructions for PX4 derived from the [Official Installation Guide](https://docs.px4.io/main/en/dev_setup/dev_env_linux_ubuntu.html#ros-gazebo-classic).
 
-# Prerequisites
+## Prerequisites
 You be running Ubuntu 20.04.
 
-# Installation
+## Installation
 
-## Download PX4 Source Code
+### Download PX4 Source Code
 ```bash
 cd ~
 git clone https://github.com/PX4/PX4-Autopilot.git
@@ -17,23 +15,23 @@ git checkout tags/v1.13.3
 git submodule update --init --recursive
 ```
 
-## Run the install script
+### Run the install script
 ```bash
 bash ./Tools/setup/ubuntu.sh  --no-sim-tools --no-nuttx
 ```
 
-## Install PX4 Dependencies
+### Install PX4 Dependencies
 ```bash
 sudo apt update
 sudo apt install -y protobuf-compiler libeigen3-dev libopencv-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 
-## Build PX4
+### Build PX4
 ```bash
 DONT_RUN=1 make px4_sitl gazebo
 ```
 
-## Add PX4 to your path
+### Add PX4 to your path
 Add the following lines to your `~/.bashrc` so that PX4 is added to the path in every terminal.
 ```bash
 source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default
