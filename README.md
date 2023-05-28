@@ -30,7 +30,7 @@ We have provided a list of recommended resources that you can use to learn more 
 ### ROS
 * [ROS Wiki](https://wiki.ros.org/)
 * [ROS Tutorials](https://wiki.ros.org/ROS/Tutorials)
-* [Getting Started With ROS | Articulated Robotics on Youtube](https://youtube.com/playlist?list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt)
+* [Getting Started With ROS - Articulated Robotics on Youtube](https://youtube.com/playlist?list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt)
 
 ### PX4 Autopilot
 * [Flight Modes](https://docs.px4.io/v1.13/en/flight_modes/#multicopter)
