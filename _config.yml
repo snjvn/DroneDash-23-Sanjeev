@@ -136,7 +136,7 @@ metadata:
     # THEME COLOR
     # Theme color metadata used in some browsers like Chrome that applies this color on browser address bar.
     # Color must be in HEX, default is LibDoc's color
-    color: '#C6EBBE'
+    color: '#123456'
 
     # IMAGE
     # Open Graph image file for social networks. Can be either relative URL from site root, absolute URL starting with 'http'. Default is LibDoc's splash screen.
@@ -287,7 +287,7 @@ prism:
         #- asm6502
         #- autohotkey
         #- autoit
-        #- bash
+        - bash
         #- basic
         #- batch
         #- bbcode
