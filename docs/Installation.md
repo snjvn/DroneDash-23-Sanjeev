@@ -35,6 +35,11 @@ cd ~/catkin_ws/src
 git clone https://github.com/IITDh-Robotics/DroneDash-23.git
 ```
 
+Add the following line to your '~/.bashrc' file.
+```bash
+GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/DroneDash-23/models
+```
+
 Build the workspace.
 ```bash
 cd ~/catkin_ws
