@@ -12,6 +12,11 @@
     <include>
       <uri>model://asphalt_plane</uri>
     </include>
+    <!-- ArUco Marker -->
+    <include>
+      <uri>model://aruco_visual_marker_0</uri>
+      <pose>19 -6.34 5.5e-2 0 0 0.0</pose>
+    </include>
     <!-- Obstacles -->
     <model name='obstacles'>
       <pose>8.79264 -0.910909 0 0 -0 0</pose>
