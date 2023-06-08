@@ -35,9 +35,9 @@ cd ~/catkin_ws/src
 git clone https://github.com/IITDh-Robotics/DroneDash-23.git
 ```
 
-Add the following line to your '~/.bashrc' file.
+Add the gazebo models to the path. You can do this by running the following command,
 ```bash
-GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/DroneDash-23/models
+echo "GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/DroneDash-23/models" >> ~/.bashrc
 ```
 
 Build the workspace.
