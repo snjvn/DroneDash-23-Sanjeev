@@ -14,12 +14,12 @@ Instructions for setting up the development environment are provided in the [Ins
 ## Demo Script
 We have provided a [demo script](./scripts/demo_node.py) to get you started. The script gets the drone to takeoff and then move forward and backward in a loop. You can launch a simulation with the demo script using the following command.
 ```bash
-roslauch drone_dash demo.launch
+roslaunch dronedash demo.launch
 ```
 
 To see the RGB and depth images from the camera in RVIZ, set the `rviz` parameter to `true`.
 ```bash
-roslauch drone_dash demo.launch rviz:=true
+roslaunch dronedash demo.launch rviz:=true
 ```
 
 Note: If the demo does not work, and you encounter the message `Failsafe mode activated` in the terminal see the [Troubleshooting](#failsafe-mode-activated) section.
