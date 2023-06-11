@@ -35,15 +35,3 @@ We have provided a list of recommended resources that you can use to learn more 
 ### PX4 Autopilot
 * [Flight Modes](https://docs.px4.io/v1.13/en/flight_modes/#multicopter)
 * [User Guide](https://docs.px4.io/v1.13/en/ros/ros1.html)
-
-## Troubleshooting
-
-### Failsafe mode activated
-It may happen that after running the demo for the first time that the drone does not takeoff and you encounter the message `Failsafe mode activated` in the terminal. To solve this paste the following command in the same terminal without stopping the running command.
-```bash
-param set COM_RCL_EXCEPT 4
-```
-
-If done correctly you should see the message `COM_RCL_EXCEPT: curr: 0 -> new: 4` in the terminal and the drone should takeoff.
-
-[Source](https://discuss.px4.io/t/failsafe-mode-activating-constantly-after-the-vehicle-enters-the-offboard-mode/24460/3)

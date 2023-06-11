@@ -48,6 +48,7 @@ cd ~/catkin_ws/
 catkin build
 ```
 
+## Sourcing the Workspace
 Source the workspace.
 ```bash
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
