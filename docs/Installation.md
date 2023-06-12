@@ -16,7 +16,7 @@ python3 -m pip install --upgrade pip
 Make sure that you have the following packages installed.
 ```bash
 sudo apt update
-sudo apt install -y git wget curl python-is-python3
+sudo apt install -y git wget curl python-is-python3 lsb-release
 ```
 
 ## ROS Noetic & Gazebo
