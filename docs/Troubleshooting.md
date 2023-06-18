@@ -1,9 +1,11 @@
 # Troubleshooting
 Steps to troubleshoot some frequently encountered errors.
 
-- [RLException: [demo.launch] is neither a launch file in package [dronedash] nor is [dronedash] a launch file name](#rlexception-demo-launch-is-neither-a-launch-file-in-package-dronedash-nor-is-dronedash-a-launch-file-name)
-- [Resource not found: px4](#resource-not-found-px4)
-- [Failsafe mode activated](#failsafe-mode-activated)
+## The asphalt plane (ground) does not cover the entire map
+This issue can be fixed by running the below command in the terminal.
+```bash
+rm -r ~/.gazebo/models/asphalt_plane
+```
 
 ## RLException: [demo.launch] is neither a launch file in package [dronedash] nor is [dronedash] a launch file name
 To resolve this error, make sure that you have [sourced the workspace](./ROS.md#sourcing-the-workspace) before running the launching the demo.
