@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="rviz" default="false"/>
+	<arg name="world" default="0"/>
 
 	<!-- Include the MAVROS node with SITL and Gazebo -->
 	<include file="$(find px4)/launch/mavros_posix_sitl.launch">
-    	<arg name="world" default="$(find dronedash)/worlds/0.world"/>
+    	<arg name="world" value="$(find dronedash)/worlds/$(arg world).world"/>
     	<arg name="sdf" value="$(find mavlink_sitl_gazebo)/models/iris_depth_camera/iris_depth_camera.sdf"/>
 	</include>
 
