@@ -4,7 +4,6 @@ import rospy
 from sensor_msgs.msg import Image
 import cv2
 import numpy as np
-from ros_numpy import numpify
 
 class ImageSubscriber:
 	def __init__(self):
