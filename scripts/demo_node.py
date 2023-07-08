@@ -13,34 +13,34 @@ def state_cb(msg):
     global current_state
     current_state = msg
 
-img_np = np.ndarray((480, 640, 1))
-q1 = float()
-q2 = float()
-q3 = float()
-q4 = float()
-mid_u = float()
-mid_d = float()
-def c_img_cb(msg):
-    global mid_u
-    global mid_d
-    global q1
-    global q2
-    global q3
-    global q4
+d_img_np = np.ndarray((480, 640, 1))
+depth_matrix = np.ndarray((3, 3))
+
+def d_img_cb(msg):
+
+    global depth_matrix
     
-    img_np = np.frombuffer(msg.data, dtype=np.float32).reshape(msg.height, msg.width, 1)
-    img_np= cv2.normalize(img_np, None, 1, 0, cv2.NORM_MINMAX, dtype=cv2.CV_32FC1)
-    mid_u = np.mean(img_np[:240, 260:380])
-    mid_d = np.mean(img_np[240:, 260:380])
-    q1 = np.mean(img_np[:240, 320:])
-    q2 = np.mean(img_np[:240, :320])
-    q3 = np.mean(img_np[240:, :320])
-    q4 = np.mean(img_np[240:, 320:])
-    
-    #rospy.loginfo(mid)
+    d_img_np = np.frombuffer(msg.data, dtype=np.float32).reshape(msg.height, msg.width, 1)
+    d_img_np= cv2.normalize(d_img_np, None, 1, 0, cv2.NORM_MINMAX, dtype=cv2.CV_32FC1)
+    #mid_u = np.mean(img_np[:240, 260:380])
+    #mid_d = np.mean(img_np[240:, 260:380])
+    depth_matrix[0, 0] = np.mean(d_img_np[:160, :240])
+    depth_matrix[0, 1] = np.mean(d_img_np[:160, 240:400])
+    depth_matrix[0, 2] = np.mean(d_img_np[:160, 400:])
+
+    depth_matrix[1, 0] = np.mean(d_img_np[160:320, :240])
+    depth_matrix[1, 1] = np.mean(d_img_np[160:320, 240:400])
+    depth_matrix[1, 2] = np.mean(d_img_np[160:320, 400:])
+
+    depth_matrix[2, 0] = np.mean(d_img_np[320:, :240])
+    depth_matrix[2, 1] = np.mean(d_img_np[320:, 240:400])
+    depth_matrix[2, 2] = np.mean(d_img_np[320:, 400:])
+
+    #(corners, ids, rejected) = cv2.aruco.detectMarkers(img_np, aruco_Dictionary, parameters=aruco_Parameters)
+    #rospy.loginfo(ids)
     #cv2.imshow('Depth', img_np[80:400, 260:380])
     #cv2.waitKey(1)
-    
+
 
 if __name__ == "__main__":
     rospy.init_node("offb_node_py")
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     local_pos_pub = rospy.Publisher("mavros/setpoint_position/local", PoseStamped, queue_size=1)
     
-    c_img_sub = rospy.Subscriber("/camera/depth/image_raw", Image, callback = c_img_cb)
+    d_img_sub = rospy.Subscriber("/camera/depth/image_raw", Image, callback = d_img_cb)
     rospy.wait_for_service("/mavros/cmd/arming")
     arming_client = rospy.ServiceProxy("mavros/cmd/arming", CommandBool)
 
@@ -114,29 +114,63 @@ if __name__ == "__main__":
                 last_req = rospy.Time.now()
                 first = False
                 continue
-            if max(q1, q2, q3, q4) == q1:
-                pose.pose.position.x += 1
-                pose.pose.position.y -= 1
-                if pose.pose.position.z < 3:
-                    pose.pose.position.z += 1
-
-            elif max(q1, q2, q3, q4) == q2:
+            if np.max(depth_matrix) == depth_matrix[0,0]:
                 pose.pose.position.x += 1
                 pose.pose.position.y += 1
                 if pose.pose.position.z < 3:
                     pose.pose.position.z += 1
+                rospy.loginfo('1')
 
-            elif max(q1, q2, q3, q4) == q3:
+            elif np.max(depth_matrix) == depth_matrix[0,1]:
+                pose.pose.position.x += 1
+                if pose.pose.position.z < 3:
+                    pose.pose.position.z += 1
+                rospy.loginfo('2')
+
+            elif np.max(depth_matrix) == depth_matrix[0,2]:
+                pose.pose.position.x += 1
+                pose.pose.position.y -= 1
+                if pose.pose.position.z > 1:
+                    pose.pose.position.z += 1
+                rospy.loginfo('3')
+
+            elif np.max(depth_matrix) == depth_matrix[1,0]:
+                pose.pose.position.x += 1
+                pose.pose.position.y += 1
+                rospy.loginfo('4')
+                
+
+            elif np.max(depth_matrix) == depth_matrix[1,1]:
+                pose.pose.position.x += 1
+                rospy.loginfo('5')
+
+            elif np.max(depth_matrix) == depth_matrix[1,2]:
+                pose.pose.position.x += 1
+                pose.pose.position.y -= 1
+                rospy.loginfo('6')
+
+            elif np.max(depth_matrix) == depth_matrix[2,0]:
                 pose.pose.position.x += 1
                 pose.pose.position.y += 1
                 if pose.pose.position.z > 1:
                     pose.pose.position.z -= 1
+                rospy.loginfo('7')
 
-            elif max(q1, q2, q3, q4) == q4:
+            elif np.max(depth_matrix) == depth_matrix[2,1]:
+                pose.pose.position.x += 1
+                if pose.pose.position.z > 1:
+                    pose.pose.position.z -= 1
+                rospy.loginfo('8')
+
+            elif np.max(depth_matrix) == depth_matrix[2,2]:
                 pose.pose.position.x += 1
                 pose.pose.position.y -= 1
                 if pose.pose.position.z > 1:
-                    pose.pose.position.z -= 1     
+                    pose.pose.position.z -= 1
+                rospy.loginfo('9')  
+            
+            if pose.pose.position.z > 3:
+                pose.pose.position.z -= 1
 
             last_req = rospy.Time.now()
 
