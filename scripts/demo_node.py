@@ -88,7 +88,7 @@ if __name__ == "__main__":
     arm_cmd.value = True
     first = True
     last_req = rospy.Time.now()
-
+    move = 5e-2
     while(not rospy.is_shutdown()):
         # First set the mode to offboard (refer to PX4 Flight Modes)
         if(current_state.mode != "OFFBOARD" and (rospy.Time.now() - last_req) > rospy.Duration(5.0)):
@@ -103,76 +103,81 @@ if __name__ == "__main__":
                 rospy.loginfo("Vehicle armed")
 
         # Move the vehicle
-        elif(current_state.armed and ((rospy.Time.now() - last_req) > rospy.Duration(4.0))):
+        elif(current_state.armed):
             #mid = np.mean(img_np[80:400, 280:360])
             #left = np.mean(img_np[80:400, 0:320])
             #right = np.mean(img_np[80:400, 320:])
             #full = np.mean(img_np)
             #rospy.loginfo(right)
-
+            
             if first:
-                last_req = rospy.Time.now()
                 first = False
+                rospy.loginfo("waiting for complete take off...")
+                last_req = rospy.Time.now()
+                while ((rospy.Time.now() - last_req) < rospy.Duration(5.0)):
+                    local_pos_pub.publish(pose)
+                    rate.sleep()
                 continue
+
             if np.max(depth_matrix) == depth_matrix[0,0]:
-                pose.pose.position.x += 1
-                pose.pose.position.y += 1
+                pose.pose.position.x += move
+                pose.pose.position.y += move
                 if pose.pose.position.z < 3:
-                    pose.pose.position.z += 1
+                    pose.pose.position.z += 2*move
                 rospy.loginfo('1')
 
             elif np.max(depth_matrix) == depth_matrix[0,1]:
-                pose.pose.position.x += 1
+                pose.pose.position.x += move
                 if pose.pose.position.z < 3:
-                    pose.pose.position.z += 1
+                    pose.pose.position.z += 2*move
                 rospy.loginfo('2')
 
             elif np.max(depth_matrix) == depth_matrix[0,2]:
-                pose.pose.position.x += 1
-                pose.pose.position.y -= 1
+                pose.pose.position.x += move
+                pose.pose.position.y -= move
                 if pose.pose.position.z > 1:
-                    pose.pose.position.z += 1
+                    pose.pose.position.z += 2*move
                 rospy.loginfo('3')
 
             elif np.max(depth_matrix) == depth_matrix[1,0]:
-                pose.pose.position.x += 1
-                pose.pose.position.y += 1
+                pose.pose.position.x += move
+                pose.pose.position.y += move
                 rospy.loginfo('4')
                 
 
             elif np.max(depth_matrix) == depth_matrix[1,1]:
-                pose.pose.position.x += 1
+                pose.pose.position.x += move
                 rospy.loginfo('5')
 
             elif np.max(depth_matrix) == depth_matrix[1,2]:
-                pose.pose.position.x += 1
-                pose.pose.position.y -= 1
+                pose.pose.position.x += move
+                pose.pose.position.y -= move
                 rospy.loginfo('6')
 
             elif np.max(depth_matrix) == depth_matrix[2,0]:
-                pose.pose.position.x += 1
-                pose.pose.position.y += 1
+                pose.pose.position.x += move
+                pose.pose.position.y += move
                 if pose.pose.position.z > 1:
-                    pose.pose.position.z -= 1
+                    pose.pose.position.z -= 2*move
                 rospy.loginfo('7')
 
             elif np.max(depth_matrix) == depth_matrix[2,1]:
-                pose.pose.position.x += 1
+                pose.pose.position.x += move
                 if pose.pose.position.z > 1:
-                    pose.pose.position.z -= 1
+                    pose.pose.position.z -= 2*move
                 rospy.loginfo('8')
 
             elif np.max(depth_matrix) == depth_matrix[2,2]:
-                pose.pose.position.x += 1
-                pose.pose.position.y -= 1
+                pose.pose.position.x += move
+                pose.pose.position.y -= move
                 if pose.pose.position.z > 1:
-                    pose.pose.position.z -= 1
+                    pose.pose.position.z -= 2*move
                 rospy.loginfo('9')  
             
             if pose.pose.position.z > 3:
-                pose.pose.position.z -= 1
+                pose.pose.position.z -= 2*move
 
-            last_req = rospy.Time.now()
+            #last_req = rospy.Time.now()
 
 
         local_pos_pub.publish(pose)
