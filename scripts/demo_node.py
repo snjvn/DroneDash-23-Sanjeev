@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
 import rospy
-from math import sqrt, pi
 import numpy as np
 import cv2
 from geometry_msgs.msg import PoseStamped
