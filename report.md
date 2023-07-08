@@ -8,13 +8,18 @@ The objective has been to navigate, without collision, to an aruco marker and la
 ## Navigation Algorithm
 Navigates with offboard mode.
 
-First idea: fly up above all the walls (because there's no ceiling!), then there would be no obstacles.
+### First idea: 
+fly up above all the walls (because there's no ceiling!), then there would be no obstacles (and no aruco tag!).
 
-But this is the serious idea:
-The image from the depth camera is divided into a 3x3 grid. The drone simply moves towards the brightest square (that is, the square which has more depth). The algorithm contains a restriction on how high the drone can fly.
+### But this is the serious idea:
+The image from the depth camera is divided into a 3x3 grid. The drone simply moves towards the deepest square. This 'depth' assigned to each square is calculated as the mean depth of all pixels in that square.
+![WhatsApp Image 2023-07-08 at 23 29 23](https://github.com/snjvn/DroneDash-23-Sanjeev/assets/91363279/ef3564e1-9029-4c9a-8531-6e125a4c7cba)
+
+The algorithm also contains a restriction on how high the drone can fly.
 
 ## Landing Algorithm
-Trouble detecting the aruco marker. But the idea was to pass the rgb image to openCV's arucomarker detector. The marker was seen on rviz, but not detected by openCV.
+Trouble detecting the aruco marker. 
+But the idea was to pass the rgb image to openCV's aruco-tag detector. Once the tag was detected, we should land by moving forward and dropping down (then we'll land on the tag).
 
 ## Simulation results from my end
 The 3x3 grid algorithm would let the drone reach the aruco marker in world 1 and 2.
