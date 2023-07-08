@@ -17,6 +17,8 @@ The image from the depth camera is divided into a 3x3 grid. The drone simply mov
 
 The algorithm also contains a restriction on how high the drone can fly.
 
+The 5 second delay in between every move (given in original demo_node) was removed. Instead, the drone moves in very small steps, which get executed at a very fast rate- this should make the drone move smoothly.
+
 ## Landing Algorithm
 Trouble detecting the aruco marker. 
 But the idea was to pass the rgb image to openCV's aruco-tag detector. Once the tag was detected, we should land by moving forward and dropping down (then we'll land on the tag).
@@ -24,6 +26,7 @@ But the idea was to pass the rgb image to openCV's aruco-tag detector. Once the 
 ## Simulation results from my end
 The 3x3 grid algorithm would let the drone reach the aruco marker in world 1.
 The drone was able to dodge the pillars quite well in world 2.
+
 
 ## Possible Improvements
 A rather trivial thing- yawing/rotating- has not been implemented. Implementing that would make it possible to navigate world 0, and reach the aruco tag of world 2.
