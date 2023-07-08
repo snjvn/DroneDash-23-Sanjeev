@@ -22,7 +22,8 @@ Trouble detecting the aruco marker.
 But the idea was to pass the rgb image to openCV's aruco-tag detector. Once the tag was detected, we should land by moving forward and dropping down (then we'll land on the tag).
 
 ## Simulation results from my end
-The 3x3 grid algorithm would let the drone reach the aruco marker in world 1 and 2.
+The 3x3 grid algorithm would let the drone reach the aruco marker in world 1.
+The drone was able to dodge the pillars quite well in world 2.
 
 ## Possible Improvements
-A rather trivial thing- yawing/rotating- has not been implemented. Implementing that would make it possible to navigate world 0.
+A rather trivial thing- yawing/rotating- has not been implemented. Implementing that would make it possible to navigate world 0, and reach the aruco tag of world 2.
